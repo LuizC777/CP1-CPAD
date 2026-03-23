@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Linking, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 export default function ProfileScreen() {
   return (
@@ -10,28 +10,24 @@ export default function ProfileScreen() {
         <Text style={styles.nameDesc}>2CCPO - Noturno</Text>
       </View>
       <View style={styles.bar}></View>
-      <View style={styles.ContactSection}>
+      <TouchableOpacity style={styles.ContactSection} onPress={() => Linking.openURL('https://github.com/LuizC777')}>
         <Ionicons name="logo-github" size={25} color="#E1306C" />
         <Text style={styles.ContactText}>https://github.com/LuizC777</Text>
-      </View>
-      <View style={styles.ContactSection}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.ContactSection} onPress={() => Linking.openURL('https://www.linkedin.com/in/luiz-claro-11b7762b8/')}>
         <Ionicons name="logo-linkedin" size={25} color="#E1306C" />
         <Text style={styles.ContactText}>
           https://www.linkedin.com/in/luiz-c...
         </Text>
-      </View>
-      <View style={styles.ContactSection}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.ContactSection} onPress={() => Linking.openURL('https://wa.me/5511997937796')}>
         <Ionicons name="logo-whatsapp" size={25} color="#E1306C" />
         <Text style={styles.ContactText}>(11) 99793 - 7796</Text>
-      </View>
-      <View style={styles.ContactSection}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.ContactSection} onPress={() => Linking.openURL('mailto:luiz.claro.lima@gmail.com')}>
         <Ionicons name="mail" size={25} color="#E1306C" />
         <Text style={styles.ContactText}>luiz.claro.lima@gmail.com</Text>
-      </View>
-      <View style={styles.ContactSection}>
-        <Ionicons name="download" size={25} color="#E1306C" />
-        <Text style={styles.ContactText}>curriculo.pdf</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
