@@ -43,6 +43,33 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 5. **Acesso ao App:**
    Após a inicialização, o terminal exibirá um QR Code. Escaneie este código utilizando o aplicativo Expo Go no seu smartphone ou pressione a tecla correspondente no terminal para abrir diretamente no emulador ativo.
 
+## 📱 Demonstração das Telas
+
+### 1. Tela de Feed/Grupos (Home)
+<img src="./assets/tela-feed.png" width="250" alt="Print da Tela Home">
+
+**Descrição:** Esta é a interface principal do aplicativo. Nela, o aluno pode visualizar os grupos de estudo disponíveis, conferir informações detalhadas (disciplina, data e laboratório) e interagir com o botão de estado dinâmico para confirmar sua entrada na sessão.
+
+<img src="./assets/home.gif" width="250" alt="GIF demonstrativo da Home">
+
+---
+
+### 2. Tela de Conexões
+<img src="./assets/tela-conexoes.png" width="250" alt="Print da Tela de Conexões">
+
+**Descrição:** Focada no networking acadêmico, esta tela apresenta uma lista de alunos e seus respectivos cursos. A barra de pesquisa superior é totalmente funcional, utilizando efeitos colaterais para filtrar os contatos dinamicamente em tempo real enquanto o usuário digita.
+
+<img src="./assets/conexoes.gif" width="250" alt="GIF demonstrativo de Conexões">
+
+---
+
+### 3. Tela de Perfil
+<img src="./assets/tela-perfil.png" width="250" alt="Print da Tela de Perfil">
+
+**Descrição:** Interface de apresentação do usuário logado. Exibe dados institucionais (curso e turno) e conta com links de contato funcionais. A integração com APIs nativas permite que o clique redirecione o usuário diretamente para aplicativos externos, como WhatsApp, LinkedIn, GitHub e cliente de E-mail.
+
+*(Nota: Como esta é uma interface focada em exibição de dados e links de redirecionamento, não possui GIF de navegação interna).*
+
 ## 📺 Demonstração
 
 Esta seção apresenta o fluxo operacional do Conecta FIAP, validando a navegação funcional entre as três telas obrigatórias.
