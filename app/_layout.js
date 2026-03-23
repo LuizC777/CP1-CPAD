@@ -49,7 +49,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="ScreenTwo"
+        name="ConnectionScreen"
         options={{
           tabBarShowLabel: false,
           headerTitle: "",
