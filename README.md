@@ -43,7 +43,7 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 5. **Acesso ao App:**
    Após a inicialização, o terminal exibirá um QR Code. Escaneie este código utilizando o aplicativo Expo Go no seu smartphone ou pressione a tecla correspondente no terminal para abrir diretamente no emulador ativo.
 
-## 📱 Demonstração das Telas
+## 📺 Demonstração das Telas
 
 ### 1. Tela de Feed/Grupos (Home)
 <img src="./assets/tela-feed.png" width="250" alt="Print da Tela Home">
@@ -69,24 +69,6 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 **Descrição:** Interface de apresentação do usuário logado. Exibe dados institucionais (curso e turno) e conta com links de contato funcionais. A integração com APIs nativas permite que o clique redirecione o usuário diretamente para aplicativos externos, como WhatsApp, LinkedIn, GitHub e cliente de E-mail.
 
 *(Nota: Como esta é uma interface focada em exibição de dados e links de redirecionamento, não possui GIF de navegação interna).*
-
-## 📺 Demonstração
-
-Esta seção apresenta o fluxo operacional do Conecta FIAP, validando a navegação funcional entre as três telas obrigatórias.
-
-### Fluxo Principal em Funcionamento (GIF):
-
-<p align="center">
-  <img src="LINK_DO_SEU_GIF_HOSPEDADO.gif" width="300" alt="Demonstração do Fluxo Principal">
-</p>
-
-### Prints das Telas:
-
-|                      Tela de Feed/Grupos                       |                           Tela de Conexões                           |                              Tela de Perfil                              |
-| :------------------------------------------------------------: | :------------------------------------------------------------------: | :----------------------------------------------------------------------: |
-| <img src="./assets/home.gif" width="200" alt="Feed de Grupos"> | <img src="./assets/conexoes.gif" width="200" alt="Tela de Conexões"> | <img src="./assets/tela-perfil.png" width="200" alt="Perfil do Usuário"> |
-
-_Nota: Os prints acima foram gerados diretamente do ambiente de desenvolvimento._
 
 ## 🏗️ Decisões Técnicas
 
