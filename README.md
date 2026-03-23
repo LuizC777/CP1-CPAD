@@ -41,3 +41,29 @@ Inicie o servidor de desenvolvimento do Expo.
 
 5. **Acesso ao App:**
 Após a inicialização, o terminal exibirá um QR Code. Escaneie este código utilizando o aplicativo Expo Go no seu smartphone ou pressione a tecla correspondente no terminal para abrir diretamente no emulador ativo.
+
+## 📺 Demonstração
+
+Esta seção apresenta o fluxo operacional do Conecta FIAP, validando a navegação funcional entre as três telas obrigatórias.
+
+### Fluxo Principal em Funcionamento (GIF):
+
+<p align="center">
+  <img src="LINK_DO_SEU_GIF_HOSPEDADO.gif" width="300" alt="Demonstração do Fluxo Principal">
+</p>
+
+### Prints das Telas:
+
+| Tela de Feed/Grupos | Tela de Conexões | Tela de Perfil |
+| :---: | :---: | :---: |
+| <img src="https://api.screenshotone.com/take?url=uploaded:image_1.png&access_key=dummy" width="200" alt="Feed de Grupos"> | <img src="https://api.screenshotone.com/take?url=uploaded:image_4.png&access_key=dummy" width="200" alt="Tela de Conexões"> | <img src="https://api.screenshotone.com/take?url=uploaded:image_2.png&access_key=dummy" width="200" alt="Perfil do Usuário"> |
+
+*Nota: Os prints acima foram gerados diretamente do ambiente de desenvolvimento.*
+
+## 🛠️ Próximos Passos (Diferenciais)
+
+Considerando o escopo de MVP deste Checkpoint, as seguintes funcionalidades foram mapeadas para implementações futuras, visando aumentar a robustez da plataforma:
+
+1.  **Integração Real:** Conexão com a API de horários da FIAP para validação automática da disponibilidade das salas em tempo real.
+2.  **Sistema de Chat:** Implementação de chat WebSocket para permitir a comunicação instantânea entre os membros de um grupo de estudo.
+3.  **Filtros Avançados:** Criação de filtros por curso, semestre e RM na tela de Conexões para facilitar o networking assertivo.
