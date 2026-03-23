@@ -1,8 +1,6 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-export default function Home() {
-  const router = useRouter();
+export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.ImgSection}>
@@ -74,7 +72,6 @@ const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderLeftColor: "#E1306C",
     marginBottom: 13,
-    justifyContent: "left",
     alignItems: "center",
     paddingLeft: 10,
   },

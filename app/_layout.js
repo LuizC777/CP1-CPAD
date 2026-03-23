@@ -10,7 +10,7 @@ export default function Layout() {
       screenOptions={{
         headerLeft: () => (
           <TouchableOpacity
-            onPress={() => router.push("/ProfileScreen")}
+            onPress={() => router.navigate("/ProfileScreen")}
             style={styles.headerButton}
           >
             <Ionicons

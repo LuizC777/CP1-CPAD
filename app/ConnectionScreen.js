@@ -1,11 +1,9 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native";
 import { useState } from "react";
-export default function Home() {
+export default function ConnectionScreen() {
   const [text, setText] = useState("");
-  const router = useRouter();
   return (
     <View style={styles.container}>
       <View style={styles.titleArea}>
