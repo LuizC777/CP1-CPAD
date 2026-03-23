@@ -28,11 +28,11 @@ Certifique-se de ter o Node.js instalado em sua máquina. Além disso, é necess
 
 2. **Clonagem do Repositório:**
 Abra o seu terminal e execute o comando de clonagem do Git utilizando a URL do repositório.
-`git clone https://github.com/SEU_USUARIO/fiap-cpad-cp1-conecta-fiap.git`
+`git clone https://github.com/LuizC777/fiap-cpad-cp1-Conecta-FIAP.git`
 
 3. **Instalação das Dependências:**
 Acesse o diretório raiz do projeto recém-clonado através do terminal e execute a instalação dos pacotes necessários.
-`cd fiap-cpad-cp1-conecta-fiap`
+`cd fiap-cpad-cp1-Conecta-FIAP`
 `npm install`
 
 4. **Execução da Aplicação:**
