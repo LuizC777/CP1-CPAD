@@ -66,7 +66,7 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 ### 3. Tela de Perfil
 <img src="./assets/tela-perfil.png" width="250" alt="Print da Tela de Perfil">
 
-**Descrição:** Interface de apresentação do usuário logado. Exibe dados institucionais (curso e turno) e conta com links de contato funcionais. A integração com APIs nativas permite que o clique redirecione o usuário diretamente para aplicativos externos, como WhatsApp, LinkedIn, GitHub e cliente de E-mail.
+**Descrição:** Interface de apresentação do usuário logado. Exibe dados institucionais (curso e turno) e conta com links de contato funcionais. Os comandos `TouchableOpacity` e `Linking` permitem que o clique redirecione o usuário diretamente para aplicativos externos, como GitHub, LinkedIn, Whatsapp e E-mail.
 
 <img src="./assets/profile.gif" width="250" alt="GIF demonstrativo de Conexões">
 
