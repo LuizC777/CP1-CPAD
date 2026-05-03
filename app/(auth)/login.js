@@ -6,6 +6,8 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -35,12 +37,16 @@ export default function Login() {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <View style={styles.Header}>
         <Text style={styles.fiap}>FIAP</Text>
         <Text style={styles.conecta}>conecta</Text>
       </View>
       <View style={styles.body}>
+        <Text style={styles.sectionTitle}>Login</Text>
         <TextInput
           placeholderTextColor="#ddd"
           placeholder="Email"
@@ -67,7 +73,7 @@ export default function Login() {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -107,6 +113,7 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     justifyContent: "center",
+    paddingBottom: 100,
   },
 
   botao: {
@@ -132,6 +139,15 @@ const styles = StyleSheet.create({
 
   linkDestaque: {
     color: "#E1306C",
+    fontWeight: "bold",
+  },
+  sectionTitle: {
+    color: "#fff",
+    fontSize: 18,
+    marginLeft: 10,
+    marginBottom: 10,
+    marginTop: 10,
+    marginBottom: 20,
     fontWeight: "bold",
   },
 });
