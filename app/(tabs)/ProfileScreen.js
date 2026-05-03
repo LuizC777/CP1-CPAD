@@ -1,6 +1,23 @@
-import { View, Text, StyleSheet, Linking, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Linking,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export default function ProfileScreen() {
+  const router = useRouter();
+
+  const logout = async () => {
+    await AsyncStorage.removeItem("logado");
+    router.replace("/login");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.ImgSection}>
@@ -10,23 +27,40 @@ export default function ProfileScreen() {
         <Text style={styles.nameDesc}>2CCPO - Noturno</Text>
       </View>
       <View style={styles.bar}></View>
-      <TouchableOpacity style={styles.ContactSection} onPress={() => Linking.openURL('https://github.com/LuizC777')}>
+      <TouchableOpacity
+        style={styles.ContactSection}
+        onPress={() => Linking.openURL("https://github.com/LuizC777")}
+      >
         <Ionicons name="logo-github" size={25} color="#E1306C" />
         <Text style={styles.ContactText}>https://github.com/LuizC777</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.ContactSection} onPress={() => Linking.openURL('https://www.linkedin.com/in/luiz-claro-11b7762b8/')}>
+      <TouchableOpacity
+        style={styles.ContactSection}
+        onPress={() =>
+          Linking.openURL("https://www.linkedin.com/in/luiz-claro-11b7762b8/")
+        }
+      >
         <Ionicons name="logo-linkedin" size={25} color="#E1306C" />
         <Text style={styles.ContactText}>
           https://www.linkedin.com/in/luiz-c...
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.ContactSection} onPress={() => Linking.openURL('https://wa.me/5511997937796')}>
+      <TouchableOpacity
+        style={styles.ContactSection}
+        onPress={() => Linking.openURL("https://wa.me/5511997937796")}
+      >
         <Ionicons name="logo-whatsapp" size={25} color="#E1306C" />
         <Text style={styles.ContactText}>(11) 99793 - 7796</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.ContactSection} onPress={() => Linking.openURL('mailto:luiz.claro.lima@gmail.com')}>
+      <TouchableOpacity
+        style={styles.ContactSection}
+        onPress={() => Linking.openURL("mailto:luiz.claro.lima@gmail.com")}
+      >
         <Ionicons name="mail" size={25} color="#E1306C" />
         <Text style={styles.ContactText}>luiz.claro.lima@gmail.com</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.LogoutButton} onPress={logout}>
+        <Text style={styles.ButtonText}>Sair</Text>
       </TouchableOpacity>
     </View>
   );
@@ -77,5 +111,18 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     opacity: 0.7,
     marginLeft: 10,
+  },
+
+  LogoutButton: {
+    backgroundColor: "#E1306C",
+    padding: 10,
+    width: 90,
+    borderRadius: 99,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  ButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });

@@ -44,7 +44,10 @@ export default function Home() {
         </View>
         <View style={styles.GroupRight}>
           <View style={styles.ImgContainer}>
-            <Image source={require("../assets/html.jpg")} style={styles.Img} />
+            <Image
+              source={require("../../assets/html.jpg")}
+              style={styles.Img}
+            />
           </View>
         </View>
       </View>
@@ -76,7 +79,7 @@ export default function Home() {
         <View style={styles.GroupRight}>
           <View style={styles.ImgContainer}>
             <Image
-              source={require("../assets/grafico.png")}
+              source={require("../../assets/grafico.png")}
               style={styles.Img}
             />
           </View>
@@ -110,7 +113,7 @@ export default function Home() {
         <View style={styles.GroupRight}>
           <View style={styles.ImgContainer}>
             <Image
-              source={require("../assets/codigo.webp")}
+              source={require("../../assets/codigo.webp")}
               style={styles.Img}
             />
           </View>
