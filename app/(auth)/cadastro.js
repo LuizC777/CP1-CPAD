@@ -31,6 +31,10 @@ export default function Register() {
   const [erroGithub, setErroGithub] = useState("");
   const [erroTel, setErroTel] = useState("");
 
+  const validarNome = (nome) => {
+    return nome.length >= 3;
+  };
+
   const validarEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email);
   };
@@ -67,6 +71,11 @@ export default function Register() {
       valido = false;
     }
 
+    if (!validarNome(nome)) {
+      setErroNome("O nome deve ter pelo menos 3 caracteres");
+      valido = false;
+    }
+
     if (!validarEmail(email)) {
       setErroEmail("Email inválido");
       valido = false;
@@ -94,6 +103,42 @@ export default function Register() {
 
     if (tel && !validarTel(tel)) {
       setErroTel("Telefone deve ter 10 ou 11 números");
+      valido = false;
+    }
+
+    // VALIDAÇÃO DE CAMPOS OBRIGATÓRIOS
+
+    if (!nome.trim()) {
+      setErroNome("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!email.trim()) {
+      setErroEmail("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!senha.trim()) {
+      setErroSenha("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!confirmar.trim()) {
+      setErroConfirmar("Campo obrigatório");
+      valido = false;
+    }
+    if (!linkedin.trim()) {
+      setErroLinkedin("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!github.trim()) {
+      setErroGithub("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!tel.trim()) {
+      setErroTel("Campo obrigatório");
       valido = false;
     }
 
