@@ -177,9 +177,9 @@ export default function Register() {
           {erroNome ? <Text style={styles.erro}>{erroNome}</Text> : null}
 
           <TextInput
+            onChangeText={(text) => setEmail(text.toLowerCase())}
             placeholder="Email"
             placeholderTextColor="#ddd"
-            onChangeText={setEmail}
             style={styles.input}
           />
           {erroEmail ? <Text style={styles.erro}>{erroEmail}</Text> : null}
@@ -206,9 +206,9 @@ export default function Register() {
           <Text style={styles.sectionTitle}>Informações adicionais</Text>
 
           <TextInput
+            onChangeText={(text) => setLinkedin(text.toLowerCase())}
             placeholder="LinkedIn"
             placeholderTextColor="#ddd"
-            onChangeText={setLinkedin}
             style={styles.input}
           />
           {erroLinkedin ? (
@@ -216,9 +216,9 @@ export default function Register() {
           ) : null}
 
           <TextInput
+            onChangeText={(text) => setGithub(text.toLowerCase())}
             placeholder="GitHub"
             placeholderTextColor="#ddd"
-            onChangeText={setGithub}
             style={styles.input}
           />
           {erroGithub ? <Text style={styles.erro}>{erroGithub}</Text> : null}

@@ -1,13 +1,10 @@
 import {
   View,
   TextInput,
-  Button,
-  Alert,
   StyleSheet,
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Platform,
 } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,11 +16,32 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  const [erroEmail, setErroEmail] = useState("");
+  const [erroSenha, setErroSenha] = useState("");
+
   const handleLogin = async () => {
+    let valido = true;
+
+    setErroEmail("");
+    setErroSenha("");
+
+    if (!email.trim()) {
+      setErroEmail("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!senha.trim()) {
+      setErroSenha("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!valido) return;
+
     const data = await AsyncStorage.getItem("usuario");
 
     if (!data) {
-      return Alert.alert("Usuário não encontrado");
+      setErroEmail("Usuário não encontrado");
+      return;
     }
 
     const usuario = JSON.parse(data);
@@ -32,7 +50,7 @@ export default function Login() {
       await AsyncStorage.setItem("logado", "true");
       router.replace("/HomeScreen");
     } else {
-      Alert.alert("Credenciais inválidas");
+      setErroSenha("Credenciais inválidas");
     }
   };
 
@@ -42,14 +60,17 @@ export default function Login() {
         <Text style={styles.fiap}>FIAP</Text>
         <Text style={styles.conecta}>conecta</Text>
       </View>
+
       <View style={styles.body}>
         <Text style={styles.sectionTitle}>Login</Text>
+
         <TextInput
           placeholderTextColor="#ddd"
           placeholder="Email"
-          onChangeText={setEmail}
+          onChangeText={(text) => setEmail(text.toLowerCase())}
           style={styles.input}
         />
+        {erroEmail ? <Text style={styles.erro}>{erroEmail}</Text> : null}
 
         <TextInput
           placeholderTextColor="#ddd"
@@ -58,6 +79,7 @@ export default function Login() {
           onChangeText={setSenha}
           style={styles.input}
         />
+        {erroSenha ? <Text style={styles.erro}>{erroSenha}</Text> : null}
 
         <TouchableOpacity style={styles.botao} onPress={handleLogin}>
           <Text style={styles.textoBotao}>Entrar</Text>
@@ -145,5 +167,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     fontWeight: "bold",
+  },
+  erro: {
+    color: "#ff4d4d",
+    marginLeft: 15,
+    marginTop: -15,
+    marginBottom: 10,
+    fontSize: 12,
   },
 });
