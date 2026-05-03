@@ -37,10 +37,7 @@ export default function Login() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.Header}>
         <Text style={styles.fiap}>FIAP</Text>
         <Text style={styles.conecta}>conecta</Text>
@@ -145,7 +142,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     marginLeft: 10,
-    marginBottom: 10,
     marginTop: 10,
     marginBottom: 20,
     fontWeight: "bold",
