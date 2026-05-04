@@ -5,18 +5,48 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  Alert,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export default function Home() {
   const [active1, setActive1] = useState(false);
   const [active2, setActive2] = useState(false);
   const [active3, setActive3] = useState(false);
+
+  // 🔄 carregar estado salvo
+  useEffect(() => {
+    const carregar = async () => {
+      const s1 = await AsyncStorage.getItem("sessao1");
+      const s2 = await AsyncStorage.getItem("sessao2");
+      const s3 = await AsyncStorage.getItem("sessao3");
+
+      if (s1) setActive1(JSON.parse(s1));
+      if (s2) setActive2(JSON.parse(s2));
+      if (s3) setActive3(JSON.parse(s3));
+    };
+
+    carregar();
+  }, []);
+
+  // 🔥 função padrão pra todas sessões
+  const toggleSessao = async (active, setActive, key, nome) => {
+    const novoEstado = !active;
+
+    setActive(novoEstado);
+    await AsyncStorage.setItem(key, JSON.stringify(novoEstado));
+
+    Alert.alert(novoEstado ? "Você entrou" : "Você saiu", `Sessão: ${nome}`);
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.titleArea}>
         <Text style={styles.title}>Sessões disponíveis</Text>
       </View>
+
+      {/* FRONT-END */}
       <View style={[styles.GroupSession, styles.sessionBg1]}>
         <View style={styles.GroupLeft}>
           <View>
@@ -28,7 +58,9 @@ export default function Home() {
             <Text style={styles.GroupDesc}>Laboratório 707</Text>
 
             <TouchableOpacity
-              onPress={() => setActive1(!active1)}
+              onPress={() =>
+                toggleSessao(active1, setActive1, "sessao1", "Front-end")
+              }
               style={[styles.Button, active1 ? styles.active : styles.inactive]}
             >
               <Text
@@ -42,6 +74,7 @@ export default function Home() {
             </TouchableOpacity>
           </View>
         </View>
+
         <View style={styles.GroupRight}>
           <View style={styles.ImgContainer}>
             <Image
@@ -52,6 +85,7 @@ export default function Home() {
         </View>
       </View>
 
+      {/* PANDAS */}
       <View style={[styles.GroupSession, styles.sessionBg2]}>
         <View style={styles.GroupLeft}>
           <View>
@@ -61,8 +95,11 @@ export default function Home() {
           <View>
             <Text style={styles.GroupDesc}>05 de Abril</Text>
             <Text style={styles.GroupDesc}>Laboratório 302</Text>
+
             <TouchableOpacity
-              onPress={() => setActive2(!active2)}
+              onPress={() =>
+                toggleSessao(active2, setActive2, "sessao2", "Pandas")
+              }
               style={[styles.Button, active2 ? styles.active : styles.inactive]}
             >
               <Text
@@ -76,6 +113,7 @@ export default function Home() {
             </TouchableOpacity>
           </View>
         </View>
+
         <View style={styles.GroupRight}>
           <View style={styles.ImgContainer}>
             <Image
@@ -86,6 +124,7 @@ export default function Home() {
         </View>
       </View>
 
+      {/* JAVASCRIPT */}
       <View style={[styles.GroupSession, styles.sessionBg3]}>
         <View style={styles.GroupLeft}>
           <View>
@@ -95,8 +134,11 @@ export default function Home() {
           <View>
             <Text style={styles.GroupDesc}>25 de Março</Text>
             <Text style={styles.GroupDesc}>Laboratório 404</Text>
+
             <TouchableOpacity
-              onPress={() => setActive3(!active3)}
+              onPress={() =>
+                toggleSessao(active3, setActive3, "sessao3", "JavaScript")
+              }
               style={[styles.Button, active3 ? styles.active : styles.inactive]}
             >
               <Text
@@ -110,6 +152,7 @@ export default function Home() {
             </TouchableOpacity>
           </View>
         </View>
+
         <View style={styles.GroupRight}>
           <View style={styles.ImgContainer}>
             <Image
