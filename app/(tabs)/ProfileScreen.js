@@ -4,16 +4,60 @@ import {
   StyleSheet,
   Linking,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
+import * as ImagePicker from "expo-image-picker";
 
 export default function ProfileScreen() {
   const router = useRouter();
 
   const [usuario, setUsuario] = useState(null);
+
+  const pedirPermissao = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (status !== "granted") {
+      alert("Permissão necessária para acessar a galeria");
+    }
+  };
+
+  const [imagem, setImagem] = useState(null);
+
+  const escolherImagem = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 1,
+      allowsEditing: true,
+    });
+
+    if (!result.canceled) {
+      const uri = result.assets[0].uri;
+      setImagem(uri);
+
+      await AsyncStorage.setItem("fotoPerfil", uri);
+    }
+  };
+
+  useEffect(() => {
+    const carregarImagem = async () => {
+      const uri = await AsyncStorage.getItem("fotoPerfil");
+      if (uri) {
+        setImagem(uri);
+      }
+    };
+
+    carregarImagem();
+    pedirPermissao();
+  }, []);
+
+  const removerImagem = async () => {
+    await AsyncStorage.removeItem("fotoPerfil");
+    setImagem(null);
+  };
 
   useEffect(() => {
     const carregarUsuario = async () => {
@@ -42,7 +86,28 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.ImgSection}>
-        <Ionicons name="person-circle-outline" size={170} color={"#E1306C"} />
+        <TouchableOpacity onPress={escolherImagem}>
+          {imagem ? (
+            <Image
+              source={{ uri: imagem }}
+              style={{ width: 170, height: 170, borderRadius: 100 }}
+            />
+          ) : (
+            <Ionicons
+              name="person-circle-outline"
+              size={170}
+              color={"#E1306C"}
+            />
+          )}
+        </TouchableOpacity>
+
+        {imagem && (
+          <TouchableOpacity onPress={removerImagem}>
+            <Text style={{ color: "#E1306C", marginTop: 10 }}>
+              Remover foto
+            </Text>
+          </TouchableOpacity>
+        )}
 
         <Text style={styles.name}>{usuario.nome}</Text>
 
