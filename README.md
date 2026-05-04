@@ -55,8 +55,7 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 <img src="./assets/tela-feed.png" width="250" alt="Print da Tela Home">
 
 - Tela de Conexões:
-<img src="./assets/tela-conexoes.png" width="250" alt="Print da Tela de Conexões">
-<img src="./assets/conexoes.gif" width="250" alt="GIF demonstrativo de Conexões">
+<img src="./assets/tela-conexoes.png" width="250" alt="Print da Tela de Conexões"> <img src="./assets/conexoes.gif" width="250" alt="GIF demonstrativo de Conexões">
 
 - Tela de Perfil:
 <img src="./assets/tela-perfil.png" width="250" alt="Print da Tela de Perfil">
