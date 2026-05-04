@@ -52,6 +52,7 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 <img width="250" alt="Login1" src="https://github.com/user-attachments/assets/d634209f-f89a-4c75-867f-9c67a6667606" /> <img width="250" alt="Login2" src="https://github.com/user-attachments/assets/ee81d719-5711-439f-b1c3-9da73280fa13" />
 
 O primeiro gif demonstra que há validação ao se cadastrar no Conecta FIAP, gerando mensagens de campo obrigatório e alguns dados tem requisitos a serem cumpridos.
+
 O segundo gif demonstra o cadastramento e o login de um usuário que foi bem sucedido.
 
 **Telas Internas (Protegidas):**
