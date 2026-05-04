@@ -8,14 +8,14 @@ O **Conecta FIAP** é uma aplicação mobile em React Native focada em otimizar 
 Nesta segunda fase (CP2), o projeto evoluiu de um MVP estático para uma aplicação dinâmica e segura. As principais melhorias incluem a implementação de um sistema completo de autenticação, persistência de dados local, proteção de rotas privadas, validação rigorosa de formulários e personalização de perfil do usuário.
 
 **Funcionalidades Implementadas:**
-- **Autenticação de Usuários:** Fluxo completo de Cadastro e Login com validação de dados e checagem de e-mails duplicados.
-- **Sessão Persistida:** O usuário logado permanece autenticado mesmo após fechar o aplicativo.
+- **Autenticação de Usuários:** Fluxo completo de Cadastro e Login com validação de dados.
+- **Sessão Persistida:** O usuário logado permanece autenticado mesmo após fechar o aplicativo, graças ao gerenciamento via AsyncStorage.
 - **Rotas Protegidas:** Bloqueio de acesso às telas internas para usuários não autenticados.
 - **Feed de Grupos de Estudo:** Visualização e inscrição em sessões disponíveis nos laboratórios da FIAP.
 - **Networking Acadêmico (Conexões):** Lista interativa de alunos da instituição para fomento de networking.
 - **Perfil do Aluno:** Central de dados do usuário logado e integração direta (Deep Linking) com apps externos (WhatsApp, LinkedIn, GitHub).
 - **Personalização de Perfil:** Acesso à câmera e galeria do dispositivo para upload de foto de perfil personalizada do aluno.
-- **Validação de Formulários Inline:** Tratamento de erros em tempo real sem uso de modais/alerts interruptivos.
+- **Validação de Formulários Inline:** Tratamento de erros em tempo real diretamente abaixo dos campos, sem interrupções por modais.
 
 
 ## b) Integrantes do Grupo
@@ -52,6 +52,7 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 <img width="250" alt="Login1" src="https://github.com/user-attachments/assets/d634209f-f89a-4c75-867f-9c67a6667606" /> <img width="250" alt="Login2" src="https://github.com/user-attachments/assets/ee81d719-5711-439f-b1c3-9da73280fa13" />
 
 **Telas Internas (Protegidas):**
+
 - Tela de Feed/Grupos (Home):
 
 <img width="250" alt="Home1" src="https://github.com/user-attachments/assets/a7e7de5f-b55a-419a-bee9-f0343d910d9f" /> <img width="250" alt="Home2" src="https://github.com/user-attachments/assets/d1e7ac12-ab46-4cb1-882e-d0ebccc2c763" />
@@ -64,27 +65,27 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 
 <img width="250" alt="Profile" src="https://github.com/user-attachments/assets/8ac0dc11-f450-4ce8-90b7-752e200bcd8a" />
 
+
 ## e) Decisões Técnicas
 
-O projeto adotou padrões arquitetônicos focados em escalabilidade, separação de responsabilidades e segurança de dados no front-end.
+A arquitetura do aplicativo foi estruturada para garantir a persistência de dados e a segurança do fluxo de navegação de forma eficiente.
 
 - **Estruturação do Projeto:**
-  - `/app`: Responsável exclusivamente pelo roteamento (Expo Router) e renderização das telas.
-  - `/contexts`: Abriga as lógicas de estado global (Context API).
-  - `/components`: Armazena componentes de UI reutilizáveis (ex: `ConnectionCard`, inputs padronizados).
-  - `/assets`: Repositório de imagens e mídias estáticas.
-
-- **Gerenciamento de Estado (Context API):**
-  Criamos o `AuthContext` para atuar como o "motor" central da aplicação. Ele fornece para toda a árvore de componentes o estado do usuário (`user`), indicadores de carregamento (`isLoading`), além das funções globais de `login`, `register` e `logout`, garantindo que os dados de sessão não precisem ser passados via *prop drilling*.
+  A base de código utiliza o **Expo Router** com uma organização modular por grupos:
+  - `/app`: Diretório raiz do roteamento.
+    - `/(auth)`: Agrupa as rotas públicas de `login.js` e `cadastro.js`.
+    - `/(tabs)`: Agrupa as telas internas (`HomeScreen.js`, `ConnectionScreen.js`, `ProfileScreen.js`) protegidas pela navegação em abas configurada no `_layout.js`.
+    - `index.js`: Ponto de entrada que gerencia o redirecionamento inicial.
+  - `/assets`: Repositório dedicado a mídias estáticas e imagens.
 
 - **Autenticação e Persistência (AsyncStorage):**
-  A autenticação valida as credenciais submetidas contra um banco de dados local. Utilizamos o `AsyncStorage` com chaves bem definidas:
-  - `@registered_users`: Armazena o array de objetos dos usuários cadastrados no app.
-  - `@user_session`: Salva os dados não sensíveis do usuário recém-logado. O `useEffect` no Contexto lê essa chave ao montar o app para recuperar a sessão automaticamente.
-  - **Mídia do Usuário:** A URI gerada ao escolher uma foto de perfil também é persistida no AsyncStorage. Isso garante que o avatar customizado do aluno não desapareça ao fechar e reabrir o aplicativo.
+  Como estratégia central de gerenciamento, utilizamos o **AsyncStorage** para suprir a necessidade de um estado global, garantindo que as informações sobrevivam ao fechamento do app:
+  - `@registered_users`: Armazena o banco de dados local com os usuários cadastrados.
+  - `@user_session`: Chave utilizada para validar se existe um usuário logado. A presença desta chave determina se o usuário é mantido na área restrita ou redirecionado para o login.
+  - **Mídia do Usuário:** A URI da foto de perfil escolhida é persistida localmente, permitindo que o avatar personalizado seja carregado automaticamente em cada nova sessão.
 
 - **Navegação Protegida:**
-  O Expo Router foi configurado com um padrão de *Layout Route*. Os arquivos `_layout.js` inspecionam o estado `user` fornecido pelo `AuthContext`. Se o estado for nulo, as rotas da área restrita redirecionam obrigatoriamente o fluxo (via método `router.replace`) de volta para a tela de Login, impedindo o acesso manual às URLs internas.
+  A proteção das rotas é feita através de verificações lógicas de estado nos arquivos de layout. Caso a sessão no AsyncStorage seja nula, o aplicativo impede o acesso às telas contidas no grupo `/(tabs)`, garantindo que apenas usuários devidamente autenticados acessem as funcionalidades internas.
 
 
 ## f) Diferencial Implementado
