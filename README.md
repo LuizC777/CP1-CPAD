@@ -51,9 +51,9 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 
 <img width="250" alt="Login1" src="https://github.com/user-attachments/assets/d634209f-f89a-4c75-867f-9c67a6667606" /> <img width="250" alt="Login2" src="https://github.com/user-attachments/assets/ee81d719-5711-439f-b1c3-9da73280fa13" />
 
-O primeiro gif demonstra que há validação ao se cadastrar no Conecta FIAP, gerando mensagens de campo obrigatório e alguns dados tem requisitos a serem cumpridos.
+**Descrição:**
 
-O segundo gif demonstra o cadastramento e o login de um usuário que foi bem sucedido.
+Essas são as telas de cadastro e login do aplicativo. No primeiro gif demonstra-se que há validação ao se cadastrar no Conecta FIAP, gerando mensagens de campo obrigatório e indicando que alguns dados tem requisitos a serem cumpridos. O segundo gif demonstra o cadastramento e o login de um usuário que foi bem sucedido.
 
 **Telas Internas (Protegidas):**
 
@@ -61,13 +61,25 @@ O segundo gif demonstra o cadastramento e o login de um usuário que foi bem suc
 
 <img width="250" alt="Home1" src="https://github.com/user-attachments/assets/a7e7de5f-b55a-419a-bee9-f0343d910d9f" /> <img width="250" alt="Home2" src="https://github.com/user-attachments/assets/d1e7ac12-ab46-4cb1-882e-d0ebccc2c763" />
 
+**Descrição:**
+
+Esta é a interface principal do aplicativo. No primeiro gif o aluno pode visualizar os grupos de estudo disponíveis, conferir informações detalhadas (disciplina, data e laboratório) e interagir com o botão de estado dinâmico para confirmar sua entrada na sessão. No segundo gif, nota-se que os dados do usuário persistem ao fechar e abrir o app devido ao uso de AsyncStorage.
+
 - Tela de Conexões:
 
 <img src="./assets/conexoes.gif" width="250" alt="GIF demonstrativo de Conexões">
 
+**Descrição:**
+
+Focada no networking acadêmico, esta tela apresenta uma lista de alunos e seus respectivos cursos. Há uma barra de pesquisa utilizando `TextInput`, que permite escrever, mas ainda não há funcionalidade de busca.
+
 - Tela de Perfil:
 
 <img width="250" alt="Profile" src="https://github.com/user-attachments/assets/8ac0dc11-f450-4ce8-90b7-752e200bcd8a" />
+
+**Descrição:**
+
+Interface de apresentação do usuário logado. Exibe dados institucionais (curso e turno) e conta com links de contato funcionais. Os comandos `TouchableOpacity` e `Linking` permitem que o clique redirecione o usuário diretamente para aplicativos externos, como GitHub, LinkedIn, Whatsapp e E-mail. Além disso, tem-se o acesso à câmera e galeria com `expo-image-picker`, permitindo que o usuário faça o upload de sua foto de perfil. E para finalizar, essa tela também conta com o botão de logout.
 
 
 ## e) Decisões Técnicas
