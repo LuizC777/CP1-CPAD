@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   ScrollView,
-  Platform,
 } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,41 +22,36 @@ export default function Register() {
   const [github, setGithub] = useState("");
   const [tel, setTel] = useState("");
 
+  // NOVOS CAMPOS
+  const [curso, setCurso] = useState("");
+  const [turno, setTurno] = useState("");
+  const [sala, setSala] = useState("");
+
+  // ERROS
+  const [erroNome, setErroNome] = useState("");
   const [erroEmail, setErroEmail] = useState("");
   const [erroSenha, setErroSenha] = useState("");
   const [erroConfirmar, setErroConfirmar] = useState("");
-  const [erroNome, setErroNome] = useState("");
   const [erroLinkedin, setErroLinkedin] = useState("");
   const [erroGithub, setErroGithub] = useState("");
   const [erroTel, setErroTel] = useState("");
 
-  const validarNome = (nome) => {
-    return nome.length >= 3;
-  };
+  const [erroCurso, setErroCurso] = useState("");
+  const [erroTurno, setErroTurno] = useState("");
+  const [erroSala, setErroSala] = useState("");
 
-  const validarEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
-
-  const validarSenha = (senha) => {
-    return senha.length >= 6;
-  };
-
-  const validarLinkedin = (url) => {
-    return url.includes("linkedin.com");
-  };
-
-  const validarGithub = (url) => {
-    return url.includes("github.com");
-  };
-
-  const validarTel = (tel) => {
-    return /^\d{10,11}$/.test(tel);
-  };
+  // VALIDAÇÕES
+  const validarNome = (nome) => nome.length >= 3;
+  const validarEmail = (email) => /\S+@\S+\.\S+/.test(email);
+  const validarSenha = (senha) => senha.length >= 6;
+  const validarLinkedin = (url) => url.includes("linkedin.com");
+  const validarGithub = (url) => url.includes("github.com");
+  const validarTel = (tel) => /^\d{10,11}$/.test(tel);
 
   const handleRegister = async () => {
     let valido = true;
 
+    // limpar erros
     setErroNome("");
     setErroEmail("");
     setErroSenha("");
@@ -65,86 +59,96 @@ export default function Register() {
     setErroLinkedin("");
     setErroGithub("");
     setErroTel("");
+    setErroCurso("");
+    setErroTurno("");
+    setErroSala("");
 
-    if (!nome) {
-      setErroNome("Digite seu nome");
-      valido = false;
-    }
-
-    if (!validarNome(nome)) {
-      setErroNome("O nome deve ter pelo menos 3 caracteres");
-      valido = false;
-    }
-
-    if (!validarEmail(email)) {
-      setErroEmail("Email inválido");
-      valido = false;
-    }
-
-    if (!validarSenha(senha)) {
-      setErroSenha("A senha deve ter pelo menos 6 caracteres");
-      valido = false;
-    }
-
-    if (senha !== confirmar) {
-      setErroConfirmar("As senhas não coincidem");
-      valido = false;
-    }
-
-    if (linkedin && !validarLinkedin(linkedin)) {
-      setErroLinkedin("Link do LinkedIn inválido");
-      valido = false;
-    }
-
-    if (github && !validarGithub(github)) {
-      setErroGithub("Link do GitHub inválido");
-      valido = false;
-    }
-
-    if (tel && !validarTel(tel)) {
-      setErroTel("Telefone deve ter 10 ou 11 números");
-      valido = false;
-    }
-
-    // VALIDAÇÃO DE CAMPOS OBRIGATÓRIOS
-
+    // validações básicas
     if (!nome.trim()) {
       setErroNome("Campo obrigatório");
+      valido = false;
+    } else if (!validarNome(nome)) {
+      setErroNome("Mínimo 3 caracteres");
       valido = false;
     }
 
     if (!email.trim()) {
       setErroEmail("Campo obrigatório");
       valido = false;
+    } else if (!validarEmail(email)) {
+      setErroEmail("Email inválido");
+      valido = false;
     }
 
     if (!senha.trim()) {
       setErroSenha("Campo obrigatório");
+      valido = false;
+    } else if (!validarSenha(senha)) {
+      setErroSenha("Mínimo 6 caracteres");
       valido = false;
     }
 
     if (!confirmar.trim()) {
       setErroConfirmar("Campo obrigatório");
       valido = false;
+    } else if (senha !== confirmar) {
+      setErroConfirmar("Senhas não coincidem");
+      valido = false;
     }
+
     if (!linkedin.trim()) {
       setErroLinkedin("Campo obrigatório");
+      valido = false;
+    } else if (!validarLinkedin(linkedin)) {
+      setErroLinkedin("Link inválido");
       valido = false;
     }
 
     if (!github.trim()) {
       setErroGithub("Campo obrigatório");
       valido = false;
+    } else if (!validarGithub(github)) {
+      setErroGithub("Link inválido");
+      valido = false;
     }
 
     if (!tel.trim()) {
       setErroTel("Campo obrigatório");
       valido = false;
+    } else if (!validarTel(tel)) {
+      setErroTel("Telefone inválido");
+      valido = false;
+    }
+
+    // NOVAS VALIDAÇÕES
+    if (!curso.trim()) {
+      setErroCurso("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!turno.trim()) {
+      setErroTurno("Campo obrigatório");
+      valido = false;
+    }
+
+    if (!sala.trim()) {
+      setErroSala("Campo obrigatório");
+      valido = false;
     }
 
     if (!valido) return;
 
-    const usuario = { nome, email, senha };
+    const usuario = {
+      nome,
+      email,
+      senha,
+      linkedin,
+      github,
+      tel,
+      curso,
+      turno,
+      sala,
+    };
 
     await AsyncStorage.setItem("usuario", JSON.stringify(usuario));
 
@@ -159,7 +163,6 @@ export default function Register() {
       <ScrollView
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
       >
         <View style={styles.Header}>
           <Text style={styles.fiap}>FIAP</Text>
@@ -168,69 +171,94 @@ export default function Register() {
 
         <View style={styles.body}>
           <Text style={styles.sectionTitle}>Cadastro</Text>
+
           <TextInput
             placeholder="Nome"
             placeholderTextColor="#ddd"
             onChangeText={setNome}
             style={styles.input}
           />
-          {erroNome ? <Text style={styles.erro}>{erroNome}</Text> : null}
+          {erroNome && <Text style={styles.erro}>{erroNome}</Text>}
 
           <TextInput
-            onChangeText={(text) => setEmail(text.toLowerCase())}
             placeholder="Email"
             placeholderTextColor="#ddd"
+            onChangeText={(text) => setEmail(text.toLowerCase())}
             style={styles.input}
           />
-          {erroEmail ? <Text style={styles.erro}>{erroEmail}</Text> : null}
+          {erroEmail && <Text style={styles.erro}>{erroEmail}</Text>}
 
           <TextInput
             placeholder="Senha"
-            placeholderTextColor="#ddd"
             secureTextEntry
+            placeholderTextColor="#ddd"
             onChangeText={setSenha}
             style={styles.input}
           />
-          {erroSenha ? <Text style={styles.erro}>{erroSenha}</Text> : null}
+          {erroSenha && <Text style={styles.erro}>{erroSenha}</Text>}
 
           <TextInput
             placeholder="Confirmar senha"
-            placeholderTextColor="#ddd"
             secureTextEntry
+            placeholderTextColor="#ddd"
             onChangeText={setConfirmar}
             style={styles.input}
           />
-          {erroConfirmar ? (
-            <Text style={styles.erro}>{erroConfirmar}</Text>
-          ) : null}
+          {erroConfirmar && <Text style={styles.erro}>{erroConfirmar}</Text>}
+
           <Text style={styles.sectionTitle}>Informações adicionais</Text>
 
           <TextInput
-            onChangeText={(text) => setLinkedin(text.toLowerCase())}
             placeholder="LinkedIn"
             placeholderTextColor="#ddd"
+            onChangeText={(text) => setLinkedin(text.toLowerCase())}
             style={styles.input}
           />
-          {erroLinkedin ? (
-            <Text style={styles.erro}>{erroLinkedin}</Text>
-          ) : null}
+          {erroLinkedin && <Text style={styles.erro}>{erroLinkedin}</Text>}
 
           <TextInput
-            onChangeText={(text) => setGithub(text.toLowerCase())}
             placeholder="GitHub"
             placeholderTextColor="#ddd"
+            onChangeText={(text) => setGithub(text.toLowerCase())}
             style={styles.input}
           />
-          {erroGithub ? <Text style={styles.erro}>{erroGithub}</Text> : null}
+          {erroGithub && <Text style={styles.erro}>{erroGithub}</Text>}
 
           <TextInput
             placeholder="Telefone"
-            placeholderTextColor="#ddd"
             keyboardType="numeric"
+            placeholderTextColor="#ddd"
             onChangeText={setTel}
             style={styles.input}
           />
-          {erroTel ? <Text style={styles.erro}>{erroTel}</Text> : null}
+          {erroTel && <Text style={styles.erro}>{erroTel}</Text>}
+
+          {/* NOVA SEÇÃO */}
+          <Text style={styles.sectionTitle}>Informações do aluno</Text>
+
+          <TextInput
+            placeholder="Curso"
+            placeholderTextColor="#ddd"
+            onChangeText={setCurso}
+            style={styles.input}
+          />
+          {erroCurso && <Text style={styles.erro}>{erroCurso}</Text>}
+
+          <TextInput
+            placeholder="Turno"
+            placeholderTextColor="#ddd"
+            onChangeText={setTurno}
+            style={styles.input}
+          />
+          {erroTurno && <Text style={styles.erro}>{erroTurno}</Text>}
+
+          <TextInput
+            placeholder="Sala"
+            placeholderTextColor="#ddd"
+            onChangeText={setSala}
+            style={styles.input}
+          />
+          {erroSala && <Text style={styles.erro}>{erroSala}</Text>}
 
           <TouchableOpacity style={styles.botao} onPress={handleRegister}>
             <Text style={styles.textoBotao}>Cadastrar</Text>
@@ -246,10 +274,12 @@ export default function Register() {
     </KeyboardAvoidingView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#222",
+    flexGrow: 1,
+    paddingBottom: 40,
   },
 
   Header: {
@@ -261,12 +291,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
 
-  fiap: {
-    color: "#E1306C",
-    fontSize: 35,
-    fontWeight: "bold",
-  },
-
+  fiap: { color: "#E1306C", fontSize: 35, fontWeight: "bold" },
   conecta: {
     color: "#E1306C",
     fontSize: 25,
@@ -274,11 +299,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
-  body: {
-    flex: 1,
-    justifyContent: "flex-start",
-    backgroundColor: "#222",
-  },
+  body: { flex: 1 },
 
   input: {
     backgroundColor: "#777",
@@ -298,22 +319,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  textoBotao: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
+  textoBotao: { color: "#fff", fontWeight: "bold", fontSize: 16 },
 
-  link: {
-    color: "#ccc",
-    textAlign: "center",
-    marginTop: 20,
-  },
+  link: { color: "#ccc", textAlign: "center", marginTop: 20 },
 
-  linkDestaque: {
-    color: "#E1306C",
-    fontWeight: "bold",
-  },
+  linkDestaque: { color: "#E1306C", fontWeight: "bold" },
 
   erro: {
     color: "#ff4d4d",
@@ -322,6 +332,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 12,
   },
+
   sectionTitle: {
     color: "#fff",
     fontSize: 18,

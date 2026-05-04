@@ -4,67 +4,95 @@ import {
   StyleSheet,
   Linking,
   TouchableOpacity,
-  Button,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
 
 export default function ProfileScreen() {
   const router = useRouter();
+
+  const [usuario, setUsuario] = useState(null);
+
+  useEffect(() => {
+    const carregarUsuario = async () => {
+      const data = await AsyncStorage.getItem("usuario");
+      if (data) {
+        setUsuario(JSON.parse(data));
+      }
+    };
+
+    carregarUsuario();
+  }, []);
 
   const logout = async () => {
     await AsyncStorage.removeItem("logado");
     router.replace("/login");
   };
 
+  if (!usuario) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ color: "#fff" }}>Carregando...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.ImgSection}>
         <Ionicons name="person-circle-outline" size={170} color={"#E1306C"} />
-        <Text style={styles.name}>Luiz Claro Lima</Text>
-        <Text style={styles.nameDesc}>Ciência da computação</Text>
-        <Text style={styles.nameDesc}>2CCPO - Noturno</Text>
+
+        <Text style={styles.name}>{usuario.nome}</Text>
+
+        <Text style={styles.nameDesc}>{usuario.curso}</Text>
+        <Text style={styles.nameDesc}>
+          {usuario.sala} - {usuario.turno}
+        </Text>
       </View>
+
       <View style={styles.bar}></View>
+
       <TouchableOpacity
         style={styles.ContactSection}
-        onPress={() => Linking.openURL("https://github.com/LuizC777")}
+        onPress={() => Linking.openURL(`https://${usuario.github}`)}
       >
         <Ionicons name="logo-github" size={25} color="#E1306C" />
-        <Text style={styles.ContactText}>https://github.com/LuizC777</Text>
+        <Text style={styles.ContactText}>{usuario.github}</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.ContactSection}
-        onPress={() =>
-          Linking.openURL("https://www.linkedin.com/in/luiz-claro-11b7762b8/")
-        }
+        onPress={() => Linking.openURL(`https://${usuario.linkedin}`)}
       >
         <Ionicons name="logo-linkedin" size={25} color="#E1306C" />
-        <Text style={styles.ContactText}>
-          https://www.linkedin.com/in/luiz-c...
-        </Text>
+        <Text style={styles.ContactText}>{usuario.linkedin}</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.ContactSection}
-        onPress={() => Linking.openURL("https://wa.me/5511997937796")}
+        onPress={() => Linking.openURL(`https://wa.me/55${usuario.tel}`)}
       >
         <Ionicons name="logo-whatsapp" size={25} color="#E1306C" />
-        <Text style={styles.ContactText}>(11) 99793 - 7796</Text>
+        <Text style={styles.ContactText}>{usuario.tel}</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.ContactSection}
-        onPress={() => Linking.openURL("mailto:luiz.claro.lima@gmail.com")}
+        onPress={() => Linking.openURL(`mailto:${usuario.email}`)}
       >
         <Ionicons name="mail" size={25} color="#E1306C" />
-        <Text style={styles.ContactText}>luiz.claro.lima@gmail.com</Text>
+        <Text style={styles.ContactText}>{usuario.email}</Text>
       </TouchableOpacity>
+
       <TouchableOpacity style={styles.LogoutButton} onPress={logout}>
         <Text style={styles.ButtonText}>Sair</Text>
       </TouchableOpacity>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -72,14 +100,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#333",
     height: "100%",
   },
+
   ImgSection: {
     margin: 20,
     alignItems: "center",
   },
+
   name: {
     color: "#E1306C",
     fontSize: 32,
   },
+
   nameDesc: {
     color: "#fff",
     opacity: 0.7,
@@ -105,6 +136,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingLeft: 10,
   },
+
   ContactText: {
     fontSize: 16,
     color: "#E1306C",
@@ -121,6 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: "center",
   },
+
   ButtonText: {
     color: "#fff",
     fontWeight: "bold",
