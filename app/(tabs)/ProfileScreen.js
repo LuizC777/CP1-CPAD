@@ -48,7 +48,7 @@ export default function ProfileScreen() {
 
         <Text style={styles.nameDesc}>{usuario.curso}</Text>
         <Text style={styles.nameDesc}>
-          {usuario.sala} - {usuario.turno}
+          {usuario.sala.toUpperCase()} - {usuario.turno}
         </Text>
       </View>
 
