@@ -49,7 +49,7 @@ Para garantir a execução adequada do Conecta FIAP em seu ambiente local, siga 
 
 **Telas de Autenticação:**
 
-<img width="250" alt="Login1" src="https://github.com/user-attachments/assets/d634209f-f89a-4c75-867f-9c67a6667606" /> <img width="648" height="1152" alt="Login1" src="https://github.com/user-attachments/assets/d634209f-f89a-4c75-867f-9c67a6667606" />
+<img width="250" alt="Login1" src="https://github.com/user-attachments/assets/d634209f-f89a-4c75-867f-9c67a6667606" /> <img width="250" alt="Login2" src="https://github.com/user-attachments/assets/ee81d719-5711-439f-b1c3-9da73280fa13" />
 
 **Telas Internas (Protegidas):**
 - Tela de Feed/Grupos (Home):
