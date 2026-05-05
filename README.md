@@ -77,6 +77,7 @@ Focada no networking acadêmico, esta tela apresenta uma lista de alunos e seus 
 
 <img width="250" alt="Profile" src="https://github.com/user-attachments/assets/8ac0dc11-f450-4ce8-90b7-752e200bcd8a" />
 
+
 **Descrição:**
 
 Interface de apresentação do usuário logado. Exibe dados institucionais (curso e turno) e conta com links de contato funcionais. Os comandos `TouchableOpacity` e `Linking` permitem que o clique redirecione o usuário diretamente para aplicativos externos, como GitHub, LinkedIn, Whatsapp e E-mail. Além disso, tem-se o acesso à câmera e galeria com `expo-image-picker`, permitindo que o usuário faça o upload de sua foto de perfil. E para finalizar, essa tela também conta com o botão de logout.
